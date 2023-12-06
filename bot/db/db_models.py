@@ -48,4 +48,10 @@ class Courses(BaseClass):
 	name = Column(String(255), unique=True)
 
 
+class Webinars(BaseClass):
+	__tablename__ = 'webinars'
+	webinar_id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
+	name = Column(String(255), unique=True)
+
+
 Base.metadata.create_all(engine)

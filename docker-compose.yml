@@ -1,36 +1,37 @@
-version: '3.1'
+version: '3.9'
 
 services:
   db_host:
     container_name: database
-    image: sarafanka/postgresql:16.0-alpine3.18
+    image: postgres:16-alpine3.18
     env_file:
       - ".env"
     environment:
-      PGPASSWORD: "12345678"
+      POSTGRES_PASSWORD: "12345678"
     restart: always
     ports:
       - 5432:5432
     networks:
       - botnet
     volumes:
-      - ./postgres:/var/lib/sarafan_db
+      - pgdata:/var/lib/postgresql/data
 
   tg_bot:
     container_name: sarafanka_bot
     build:
       context: .
-    command: python go_pls.py
+#    command: python go_pls.py
     networks:
       - botnet
     env_file:
       - ".env"
     volumes:
-      - .:/sarafanka_db
+      - .:/sarafanka
     depends_on:
       - db_host
 
-#  rediska:
+volumes:
+  pgdata:
 
 networks:
   botnet:
