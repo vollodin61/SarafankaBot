@@ -30,7 +30,7 @@ services:
     depends_on:
       - db_host
 
-  rediska:
+#  rediska:
 
 networks:
   botnet:
