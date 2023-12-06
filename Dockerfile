@@ -5,8 +5,8 @@ RUN apk update && \
 
 WORKDIR /sarafanka
 
-COPY requirements.txt .
+COPY . .
 
 RUN pip install -r requirements.txt
 
-CMD ["python", "bot/main.py"]
+CMD ["python", "main.py"]

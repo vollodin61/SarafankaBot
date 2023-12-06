@@ -1,6 +1,6 @@
 import asyncio
 import logging
-
+from time import sleep
 from aiogram import Bot, Dispatcher, html, F
 from aiogram.enums import ParseMode
 from aiogram.filters import Command, CommandObject, CommandStart
@@ -13,9 +13,11 @@ from aiogram.utils.formatting import as_list, as_marked_section, Bold, as_key_va
 from aiogram.utils.markdown import hide_link
 from aiogram.utils.media_group import MediaGroupBuilder
 
-from config.cfg import bot, dp
-from commands.setter import set_commands
-from handlers import set_routers
+# sleep(600)
+
+from bot.config.cfg import bot, dp
+from bot.commands.setter import set_commands
+from bot.handlers.setter_handlers import set_routers
 
 
 async def main():

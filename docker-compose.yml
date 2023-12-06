@@ -10,7 +10,7 @@ services:
       POSTGRES_PASSWORD: "12345678"
     restart: always
     ports:
-      - 5432:5432
+      - 5433:5433
     networks:
       - botnet
     volumes:
@@ -20,7 +20,7 @@ services:
     container_name: sarafanka_bot
     build:
       context: .
-#    command: python go_pls.py
+    command: python main.py
     networks:
       - botnet
     env_file:
