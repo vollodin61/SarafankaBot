@@ -34,7 +34,9 @@ PGUSER = env("PGUSER")
 PGPASS = env("PGPASS")
 PGDATA = env("PGDATA")
 PGHOST = env("PGHOST")
+PGPORT = env("PGPORT")
 POSTGRES_URI = f"postgresql://{PGUSER}:{PGPASS}@{IP}/{PGDATA}"
+postgres_url = f'postgresql+psycopg2://{PGUSER}:{PGPASS}@{PGHOST}:{PGPORT}/{PGDATA}'
 
 
 class AvailableState(StatesGroup):
