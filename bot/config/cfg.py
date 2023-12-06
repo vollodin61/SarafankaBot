@@ -4,12 +4,12 @@ from environs import Env
 
 from aiogram import Router, Dispatcher, Bot
 from aiogram.enums.parse_mode import ParseMode
-from aiogram.fsm.storage.memory import MemoryStorage
-from aiogram.fsm.storage.redis import RedisStorage  #, Redis
-
 from aiogram.fsm.state import State, StatesGroup
+from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.fsm.storage.redis import RedisStorage
 
-from redis import Redis
+
+from redis.asyncio.client import Redis
 
 from . import format_text_html as fth
 
@@ -25,14 +25,21 @@ bot_token = env("TOKEN")
 admins = list(map(lambda x: int(x), (env('ADMINS')).split(', ')))  # превращаем строку админов в список int
 
 red = Redis()  # Как это запустить, чтоб работало!! АААА!!!!!!!!
-red_storage = RedisStorage.from_url(url2)  #
+red_storage = RedisStorage(red)  #
 storage = MemoryStorage()
-dp = Dispatcher(storage=storage)
+dp = Dispatcher(storage=red_storage)
 bot = Bot(token=bot_token, parse_mode="HTML")
-# rt = Router()
-# dp.include_router(rt)
+IP = env("ip")
+PGUSER = env("PGUSER")
+PGPASS = env("PGPASS")
+PGDATA = env("PGDATA")
+PGHOST = env("PGHOST")
+POSTGRES_URI = f"postgresql://{PGUSER}:{PGPASS}@{IP}/{PGDATA}"
 
 
 class AvailableState(StatesGroup):
-	pass
+	st1 = State()
+	st2 = State()
+	st3 = State()
+	st4 = State()
 
