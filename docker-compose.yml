@@ -10,11 +10,23 @@ services:
       POSTGRES_PASSWORD: "12345678"
     restart: always
     ports:
-      - 5433:5433
+      - "5433:5433"
     networks:
       - botnet
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgres/data
+
+  rediska:
+    container_name: rediska
+    image: "redis:5.0.1"
+    restart: always
+#    ports: ХЗ ПОЧЕМУ НО ЭТО НЕ НАДО, ЧТОБЫ ВНУТРИ ДОКЕРА БОТ К РЕДИСУ ОБРАЩАЛСЯ
+#      - "6378:6378"
+    command: redis-server
+    networks:
+      - botnet
+    volumes:
+      - rediska_v_sarafane:/etc/redis/data
 
   tg_bot:
     container_name: sarafanka_bot
@@ -29,9 +41,11 @@ services:
       - .:/sarafanka
     depends_on:
       - db_host
+      - rediska
 
 volumes:
   pgdata:
+  rediska_v_sarafane:
 
 networks:
   botnet:
