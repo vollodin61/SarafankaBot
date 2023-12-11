@@ -21,7 +21,7 @@ from bot.handlers.setter_handlers import set_routers
 
 
 async def main():
-	logging.basicConfig(level=logging.INFO)
+	# logging.basicConfig(level=logging.INFO)
 	set_routers(dp)
 	await set_commands(bot)
 	await bot.delete_webhook(drop_pending_updates=True)

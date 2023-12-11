@@ -16,7 +16,7 @@ from . import format_text_html as fth
 
 url = 'http://redis://localhost:6379/0'
 url2 = 'redis://localhost:6378/1'
-logging.basicConfig(level=logging.INFO)
+# logging.basicConfig(level=logging.INFO)
 # logging.basicConfig(level=logging.ERROR)
 
 env = Env()
