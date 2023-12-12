@@ -4,14 +4,13 @@ import sqlalchemy
 from sqlalchemy import (create_engine, MetaData, Table, Integer,
 						String, Column, DateTime, ForeignKey, ForeignKeyConstraint, Numeric, Text, Boolean)
 from sqlalchemy.orm import declarative_base, relationship, mapped_column, Mapped
-from psycopg2 import connect
-from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 from datetime import datetime
 
 from bot.config.cfg import postgres_url
 
 # engine = create_engine(postgres_url)  # это движок для работы с бд
-engine = create_engine("postgresql+psycopg2://postgres:12345678@localhost:5432/sqlalchemy_tuts")  # Если тут добавить Echo=True то будет выводить лог
+									#  12345678 - это пароль для пользователя i
+engine = create_engine("postgresql+psycopg2://i:12345678@localhost:5432/sarafan_db", echo=True)  # Если тут добавить Echo=True то будет выводить лог
 # engine = create_engine(postgres_url, echo=True)
 
 # engine.connect()
@@ -77,6 +76,17 @@ class Webinars(BaseClass):
 #
 # class Club(BaseClass):
 # 	pass
-
-
 Base.metadata.create_all(engine)
+
+# try:
+# 	Base.metadata.create_all(engine)
+# except Exception:
+# 	from psycopg2 import connect
+# 	from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+#
+# 	connection = connect(user='i', password='12345678')
+# 	connection.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+# 	cursor = connection.cursor()
+# 	sql_database = cursor.execute('create database sqlalchemy_tuts')
+# 	cursor.close()
+# 	connection.close()
