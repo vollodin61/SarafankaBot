@@ -24,8 +24,8 @@ env.read_env()
 bot_token = env("TOKEN")
 admins = list(map(lambda x: int(x), (env('ADMINS')).split(', ')))  # превращаем строку админов в список int
 
-# red = Redis(host='rediska')  # Как это запустить, чтоб работало!! АААА!!!!!!!!
-red = Redis(host='localhost')  # Как это запустить, чтоб работало!! АААА!!!!!!!!
+red = Redis(host='rediska')  # Это настройка для контейнера
+# red = Redis(host='localhost')  # Это для локалхоста
 red_storage = RedisStorage(red)  #
 storage = MemoryStorage()
 dp = Dispatcher(storage=red_storage)
